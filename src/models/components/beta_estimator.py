@@ -24,8 +24,7 @@ class BetaEstimator(nn.Module):
             dropout=dropout
         )
 
-        self.asset_embeddings = nn.Embedding(num_assets, hidden_size)        
-       
+        self.asset_embeddings = nn.Embedding(num_assets, hidden_size)
         self.beta_hidden1 = nn.Sequential(
             nn.Linear(hidden_size * 3, hidden_size),
             nn.BatchNorm1d(hidden_size),
@@ -41,6 +40,9 @@ class BetaEstimator(nn.Module):
         )
         
         self.beta_output = nn.Linear(hidden_size // 2, 1)
+        # 베타 초기화 - 평균 1.0 근처에서 시작
+        nn.init.normal_(self.beta_output.weight, mean=0.0, std=0.1)
+        nn.init.constant_(self.beta_output.bias, 1.0)  # 베타 1.0에서 시작
 
     def forward(self, asset_data, common_data):        
         if asset_data.dim() == 4:
