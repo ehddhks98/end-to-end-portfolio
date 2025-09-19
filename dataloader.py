@@ -307,11 +307,11 @@ class FinancialDataset(Dataset):
             end_limit = train_end_idx - self.pred_horizon # 미래 예측 기간을 위한 제한
             self.valid_indices = list(range(start_offset, end_limit))
         elif self.split == 'val':
-            start_offset = train_end_idx + self.lookback # 훈련 끝 이후 lookback만큼 건너뛰기
+            start_offset = train_end_idx
             end_limit = val_end_idx - self.pred_horizon
             self.valid_indices = list(range(start_offset, end_limit))
         else:  # test
-            start_offset = val_end_idx + self.lookback # 검증 끝 이후 lookback만큼 건너뛰기
+            start_offset = val_end_idx
             end_limit = total_days - self.pred_horizon
             self.valid_indices = list(range(start_offset, end_limit, self.pred_horizon)) # 리밸런싱 시 pred_horizon 간격으로 샘플링
         
