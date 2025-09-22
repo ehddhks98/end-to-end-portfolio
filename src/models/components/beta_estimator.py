@@ -17,7 +17,7 @@ class BetaEstimator(nn.Module):
         )       
 
         self.market_encoder = TCNEncoder(
-            input_size=1,
+            input_size=2,
             hidden_size=hidden_size,
             num_channels=num_channels,
             kernel_size=kernel_size,
@@ -57,8 +57,7 @@ class BetaEstimator(nn.Module):
         device = asset_data.device
         
         # 시장 수익률 추출 및 인코딩
-        market_returns = common_data[:, :, 0].unsqueeze(-1)  # (batch, seq_len, 1)
-        market_context = self.market_encoder(market_returns)  # (batch, hidden_size)
+        market_context = self.market_encoder(common_data)  # (batch, hidden_size)
         
         # 배치 처리를 위한 자산 데이터 재구성
         asset_returns_flat = asset_data.transpose(1, 2).reshape(-1, seq_len).unsqueeze(-1)       
