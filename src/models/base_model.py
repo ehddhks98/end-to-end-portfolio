@@ -146,7 +146,8 @@ class BasePortfolioOptimizer(nn.Module, ABC):
             'ols_drawdown': performance_metrics['ols_mdd'],
             'ols_weights': weights_ols,
             'ols_expected_returns': return_ols,
-            'risk_free_rate': current_rf_scalar
+            'risk_free_rate': current_rf_scalar,
+            'ols_beta': beta_ols
         }
         
         # 손실 정보 추가

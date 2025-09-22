@@ -66,7 +66,7 @@ def parse_arguments():
 
 def get_model_class(model_name):    
     try:
-        # train.py와 동일하게, 모델 별명과 실제 import 경로를 매핑합니다.
+        # train.py와 동일하게, 모델 별명과 실제 import 경로를 매핑
         if model_name == 'model_var':
             from src.models.var_model import PortfolioOptimizer
         elif model_name == 'model_sharpe':

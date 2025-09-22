@@ -58,7 +58,7 @@ class PortfolioQPOptimizer:
 
         # Inequality constraints: w_i >= 0 (G w <= h)
         if allow_short_selling:
-            # 공매도 허용 시: 효과 없는 제약 조건을 넣어줍니다
+            # 공매도 허용 시: 효과 없는 제약 조건
             # 예: 0 * w <= 0 (항상 참)
             G = torch.zeros(batch_size, 1, n, device=device)
             h = torch.zeros(batch_size, 1, device=device)

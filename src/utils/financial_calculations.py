@@ -59,8 +59,8 @@ def capm_expected_returns(betas, common_data):
 
 def cal_cov_matrix_capm(betas, returns_data, common_data):
     """
-    (최종 수정) 단일 지수 모형을 사용하여 공분산 행렬을 계산합니다.
-    TCN 모델은 베타만 예측하므로, CAPM 이론에 따라 알파(α)는 0으로 가정합니다.
+    (최종 수정) 단일 지수 모형을 사용하여 공분산 행렬을 계산
+    TCN 모델은 베타만 예측하므로, CAPM 이론에 따라 알파는 0으로 가정
     Σ = ββ^T * Var(R_m - R_f) + D(Var(ε_i))
     
     Args:
@@ -130,10 +130,9 @@ def cal_cov_matrix(returns_data):
     d2 = (S - F).pow(2).sum(dim=[1, 2])
     
     # b^2 = 1/(T-1)^2 * sum_{t=1 to T} || (x_t * x_t^T) - S ||^2
-    # x_t는 중심화된 수익률 벡터입니다.
+    # x_t는 중심화된 수익률 벡터
     
     # (batch, T, N, 1) @ (batch, T, 1, N) -> (batch, T, N, N)
-    # ▼▼▼ [핵심 수정] torch.bmm을 @ 연산자(torch.matmul)로 변경 ▼▼▼
     xxt = centered_returns.unsqueeze(3) @ centered_returns.unsqueeze(2)
     # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
     
@@ -167,11 +166,11 @@ def cal_cov_matrix_simple(returns_data):
     """
     batch_size, T, N = returns_data.shape
     
-    # 1. 데이터 중심화 (각 자산의 시간축 평균을 뺌)
+    # 데이터 중심화 (각 자산의 시간축 평균을 뺌)
     mean_returns = returns_data.mean(dim=1, keepdim=True)
     centered_returns = returns_data - mean_returns
     
-    # 2. 샘플 공분산 행렬 계산
+    # 샘플 공분산 행렬 계산
     # 공식: Cov(X) = (X_centered^T * X_centered) / (n - 1)
     # torch.bmm은 배치 행렬 곱셈을 수행
     # centered_returns.transpose(1, 2) -> (batch, num_assets, time_steps)
@@ -318,7 +317,7 @@ def cal_mdd(daily_portfolio_returns):
 
     # 4. 최대 낙폭(MDD) 찾기
     # drawdown 텐서에서 가장 작은 값(가장 큰 손실)을 확인
-    # .min()은 값과 인덱스를 함께 반환하므로 .values로 값만 가져옵니다.
+    # .min()은 값과 인덱스를 함께 반환하므로 .values로 값만 추출
     max_drawdown = torch.min(drawdown, dim=1).values    
     
     return -max_drawdown

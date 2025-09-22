@@ -496,7 +496,7 @@ class PortfolioTrainer:
 
     def plot_strategic_bias_analysis(self, test_results, asset_names, save_path):
         """
-        (수정됨) 테스트셋 전체 평균 데이터로 모델의 전략적 편향을 분석합니다.
+        테스트셋 전체 평균 데이터로 모델의 전략적 편향을 분석
         (평균 위험 프리미엄 | 평균 공분산 | 평균 상관관계 | 평균 가중치)
         """
         print("\n=== 모델 전략적 편향 분석 시각화 시작 ===")
