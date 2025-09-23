@@ -47,7 +47,7 @@ end-to-end-portfolio/
 ## 데이터
 
 ### 주식 데이터
-프로젝트는 **17개 주요 미국 주식**의 일일 기술적 데이터를 사용합니다:
+프로젝트는 **16개 주요 미국 주식**의 일일 기술적 데이터를 사용합니다:
 
 **기술주**: AAPL, MSFT, NVDA, INTC, ORCL, IBM  
 **금융주**: JPM, BAC, MS  
@@ -56,7 +56,6 @@ end-to-end-portfolio/
 
 ### 시장 팩터
 - **Fama-French 리서치 데이터**: 시장 위험 프리미엄, 무위험 수익률
-- **일일/월별 팩터 데이터**: 다양한 리밸런싱 주기 지원
 
 ## 모델 아키텍처
 
@@ -117,18 +116,16 @@ Loss = -E[Sharpe Ratio] + γ × KL_Divergence + η × VaR
 ### 포트폴리오 최적화
 - **제약 조건**: 가중치 합 = 1, 공매도 금지 (선택적)
 - **QP 최적화**: 효율적인 2차 계획법 사용
-- **정규화**: 수치적 안정성을 위한 공분산 행렬 정규화
 
 ## 실험 및 결과
 
 ### 백테스팅 설정
-- **훈련 기간**: 2000-2020
-- **테스트 기간**: 2020-2024
-- **리밸런싱**: 월별/일별 선택 가능
-- **거래 비용**: 고려 가능 (설정에 따라)
+- **훈련 기간**: 2000-2009
+- **검증 기간**: 2010-2014
+- **테스트 기간**: 2015-2024
+- **리밸런싱**: 월별
 
 ### 벤치마크 비교
-- **동일 가중 포트폴리오**
 - **시장 지수 (S&P 500)**
 - **전통적 평균-분산 최적화**
 
@@ -153,4 +150,6 @@ def _calculate_loss(self, performance_metrics, expected_returns,
 - **TCN**: Bai, S., Kolter, J. Z., & Koltun, V. (2018). An empirical evaluation of generic convolutional and recurrent networks for sequence modeling.
 - **CAPM**: Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk.
 - **포트폴리오 이론**: Markowitz, H. (1952). Portfolio selection.
+
+
 
