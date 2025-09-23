@@ -122,8 +122,9 @@ Loss = -E[Sharpe Ratio] + γ × KL_Divergence + η × VaR
 ## 실험 및 결과
 
 ### 백테스팅 설정
-- **훈련 기간**: 2000-2020
-- **테스트 기간**: 2020-2024
+- **훈련 기간**: 2000-2009
+- **검증 기간**: 2010-2014
+- **테스트 기간**: 2015-2024
 - **리밸런싱**: 월별/일별 선택 가능
 - **거래 비용**: 고려 가능 (설정에 따라)
 
@@ -153,4 +154,5 @@ def _calculate_loss(self, performance_metrics, expected_returns,
 - **TCN**: Bai, S., Kolter, J. Z., & Koltun, V. (2018). An empirical evaluation of generic convolutional and recurrent networks for sequence modeling.
 - **CAPM**: Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk.
 - **포트폴리오 이론**: Markowitz, H. (1952). Portfolio selection.
+
 
