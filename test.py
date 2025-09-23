@@ -89,6 +89,7 @@ def get_model_class(model_name):
 def main():
     try:
         args = parse_arguments()
+        set_seed(args.seed)
 
         print("=" * 60)
         print("TCN 기반 포트폴리오 최적화 모델 테스트")

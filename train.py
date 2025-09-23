@@ -92,7 +92,7 @@ def main():
     try:
         # 인수 파싱
         args = parse_arguments()
-        
+        set_seed(args.seed)
         print("=" * 60)
         print(f"{args.model.upper()} 기반 적응형 포트폴리오 최적화 훈련 시작")
         print("=" * 60)
